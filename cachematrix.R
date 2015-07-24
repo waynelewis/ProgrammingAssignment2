@@ -3,7 +3,7 @@
 ## cached version, the inverse will be calculated and cached.
 
 ## This function provides a set of sub-functions to store and return a matrix,
-## as well as caculate and return the matrix inverse.
+## as well as calculate and return the matrix inverse.
 
 makeCacheMatrix <- function(x = matrix()) {
     inverse <- NULL
@@ -22,7 +22,9 @@ makeCacheMatrix <- function(x = matrix()) {
 
 
 ## If the inverse has not been cached, calculate it and store it. If is has
-## been cached, then return the cached value.
+## been cached, then return the cached value. No checks are done on whether the
+## matrix can be inverted. A non-invertable matrix will generate an untrapped
+## error.
 
 cacheSolve <- function(x, ...) {
     inverse <- x$get_inverse()
@@ -32,7 +34,7 @@ cacheSolve <- function(x, ...) {
         }
     data <- x$get()
         inverse <- solve(data, ...)
-        x$set_inverse(inv)
+        x$set_inverse(inverse)
         inverse
 
 ## Return a matrix that is the inverse of 'x'
